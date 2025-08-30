@@ -5,7 +5,7 @@ ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 
-class Cliente {
+class Produto {
     private $codigo;
     private $descricao;
     private $preco;

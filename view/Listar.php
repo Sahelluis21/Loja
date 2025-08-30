@@ -1,13 +1,14 @@
 <h2>Produtos</h2>
 <table border="1">
     <tr>
-        <th>ID</th><th>Nome</th><th>Email</th><th>Ações</th>
+        <th>Codigo</th><th>Nome</th><th>Preço</th><th>Quantidade</th>
     </tr>
-    <?php foreach ($clientes as $c): ?>
+    <?php foreach ($produto as $c): ?>
     <tr>
-        <td><?= $c->getId() ?></td>
-        <td><?= $c->getNome() ?></td>
-        <td><?= $c->getEmail() ?></td>
+        <td><?= $c->getcodigo() ?></td>
+        <td><?= $c->getdescricao() ?></td>
+        <td><?= $c->getpreco() ?></td>
+        <td><?= $c->getqtde() ?></td>
         <td>
             <a href="index.php?acao=formAlterar&id=<?= $c->getId() ?>">Editar</a>
             <a href="index.php?acao=remover&id=<?= $c->getId() ?>" 

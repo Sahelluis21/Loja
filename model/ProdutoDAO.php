@@ -1,6 +1,6 @@
 <?php
 require_once "Banco.php";
-require_once "Cliente.php";
+require_once "Produto.php";
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
@@ -27,7 +27,7 @@ class ProdutoDAO {
         return $produto;
     }
 
-    public function buscarPorId($codigo) {
+    public function buscarPorcodigo($codigo) {
         $stmt = $this->conexao->prepare("SELECT * FROM produto WHERE codigo = :codigo");
         $stmt->bindParam(':codigo', $codigo, PDO::PARAM_INT);
         $stmt->execute();
@@ -48,15 +48,16 @@ class ProdutoDAO {
 
     public function atualizar(Produto $produto) {
         $stmt = $this->conexao->prepare("UPDATE produto SET descricao = :descricao, preco = :preco, qtde = :qtde WHERE codigo = :codigo");
-        $stmt->bindValue(':nome', $cliente->getNome());
-        $stmt->bindValue(':email', $cliente->getEmail());
-        $stmt->bindValue(':id', $cliente->getId(), PDO::PARAM_INT);
+        $stmt->bindValue(':descricao', $produto->getdescricao());
+        $stmt->bindValue(':preco', $produto->getpreco());
+        $stmt->bindValue(':qtde', $produto->getqtde(), PDO::PARAM_INT);
+        $stmt->bindValue(':codigo', $produto->getcodigo(), PDO::PARAM_INT);
         return $stmt->execute();
     }
 
-    public function remover($id) {
-        $stmt = $this->conexao->prepare("DELETE FROM clientes WHERE id = :id");
-        $stmt->bindValue(':id', $id, PDO::PARAM_INT);
+    public function remover($codigo) {
+        $stmt = $this->conexao->prepare("DELETE FROM produto WHERE codigo = :codigo");
+        $stmt->bindValue(':codigo', $codigo, PDO::PARAM_INT);
         return $stmt->execute();
     }
 }

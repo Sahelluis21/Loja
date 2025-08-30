@@ -1,18 +1,18 @@
 <?php
-require_once __DIR__ . "/../model/ClienteDAO.php";
-require_once __DIR__ . "/../model/Cliente.php";
+require_once __DIR__ . "/../model/ProdutoDAO.php";
+require_once __DIR__ . "/../model/Produto.php";
 
 class Controlador {
-    private $clienteDAO;
+    private $ProdutoDAO;
 
     public function __construct() {
-        $this->clienteDAO = new ClienteDAO();
+        $this->ProdutoDAO = new ProdutoDAO();
     }
 
     public function executar($acao) {
         switch ($acao) {
             case 'listar':
-                $clientes = $this->clienteDAO->listar();
+                $produto = $this->ProdutoDAO->listar();
                 $viewFile = "view/Listar.php";
                 include "view/template.php";
                 break;
@@ -23,30 +23,30 @@ class Controlador {
                 break;
 
             case 'gravar':
-                $cliente = new Cliente(null, $_POST['nome'], $_POST['email']);
-                $this->clienteDAO->inserir($cliente);
+                $produto = new Produto(null, $_POST['descricao'], $_POST['preco'], $_POST['qtde']);
+                $this->ProdutoDAO->inserir($produto);
                 header("Location: index.php?acao=listar");
                 break;
 
             case 'remover':
-                $this->clienteDAO->remover($_GET['id']);
+                $this->ProdutoDAO->remover($_GET['codigo']);
                 header("Location: index.php?acao=listar");
                 break;
 
             case 'formAlterar':
-                $cliente = $this->clienteDAO->buscarPorId($_GET['id']);
+                $produto = $this->ProdutoDAO->buscarPorcodigo($_GET['codigo']);
                 $viewFile = "view/Alterar.php";
                 include "view/template.php";
                 break;
 
             case 'atualizar':
-                $cliente = new Cliente($_POST['id'], $_POST['nome'], $_POST['email']);
-                $this->clienteDAO->atualizar($cliente);
+                $produto = new Produto($_POST['codigo'], $_POST['descricao'], $_POST['preco'], $_POST['qtde']);
+                $this->ProdutoDAO->atualizar($produto);
                 header("Location: index.php?acao=listar");
                 break;
 
             default:
-                $clientes = $this->clienteDAO->listar();
+                $produto = $this->ProdutoDAO->listar();
                 $viewFile = "view/Listar.php";
                 include "view/template.php";
                 break;
