@@ -6,22 +6,28 @@ error_reporting(E_ALL);
 
 
 class Cliente {
-    private $id;
-    private $nome;
-    private $email;
+    private $codigo;
+    private $descricao;
+    private $preco;
+    private $qtde;
 
-    public function __construct($id = null, $nome = null, $email = null) {
-        $this->id = $id;
-        $this->nome = $nome;
-        $this->email = $email;
+    public function __construct($codigo = null, $descricao = null, $preco = null, $qtde = null) {
+        $this->codigo = $codigo;
+        $this->descricao = $descricao;
+        $this->preco = $preco;
+        $this->qtde = $qtde;
     }
 
-    public function getId() { return $this->id; }
-    public function setId($id) { $this->id = $id; }
+    public function getcodigo() { return $this->codigo; }
+    public function setcodigo($codigo) { $this->codigo = $codigo; }
 
-    public function getNome() { return $this->nome; }
-    public function setNome($nome) { $this->nome = $nome; }
+    public function getdescricao() { return $this->descricao; }
+    public function setdescricao($descricao) { $this->descricao = $descricao; }
 
-    public function getEmail() { return $this->email; }
-    public function setEmail($email) { $this->email = $email; }
+    public function getpreco() { return $this->preco; }
+    public function setpreco($preco) { $this->preco = $preco; }
+
+    public function getqtde() { return $this->qtde; }
+    public function setqtde($qtde) { $this->qtde = $qtde; }
+
 }
