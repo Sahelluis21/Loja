@@ -2,6 +2,10 @@
 require_once __DIR__ . "/../model/ProdutoDAO.php";
 require_once __DIR__ . "/../model/Produto.php";
 
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 class Controlador {
     private $ProdutoDAO;
 
@@ -11,44 +15,75 @@ class Controlador {
 
     public function executar($acao) {
         switch ($acao) {
+
+            
             case 'listar':
-                $produto = $this->ProdutoDAO->listar();
-                $viewFile = "view/Listar.php";
-                include "view/template.php";
+                $produtos = $this->ProdutoDAO->listar();
+                $viewFile = __DIR__ . "/../view/Listar.php";
+    
+                (function() use ($viewFile, $produtos) {
+                    include __DIR__ . "/../view/template.php";
+                })();
                 break;
 
-            case 'formAdicionar':
-                $viewFile = "view/Gravar.php";
-                include "view/template.php";
-                break;
+    
+            case 'adicionarCarrinho':
+                $codigo = $_POST['codigo'];
+                $qtde = (int) $_POST['quantidade'];
 
-            case 'gravar':
-                $produto = new Produto(null, $_POST['descricao'], $_POST['preco'], $_POST['qtde']);
-                $this->ProdutoDAO->inserir($produto);
+                $produto = $this->ProdutoDAO->buscarPorCodigo($codigo);
+
+                if ($produto) {
+                    if ($qtde > 0 && $qtde <= $produto->getQtde()) {
+                        if (!isset($_SESSION['carrinho'])) {
+                            $_SESSION['carrinho'] = [];
+                        }
+
+                        if (isset($_SESSION['carrinho'][$codigo])) {
+                            $novaQtd = $_SESSION['carrinho'][$codigo]['qtde'] + $qtde;
+                            if ($novaQtd > $produto->getQtde()) {
+                                $novaQtd = $produto->getQtde();
+                            }
+                            $_SESSION['carrinho'][$codigo]['qtde'] = $novaQtd;
+                        } else {
+                            $_SESSION['carrinho'][$codigo] = [
+                                'descricao' => $produto->getDescricao(),
+                                'preco' => $produto->getPreco(),
+                                'qtde' => $qtde
+                            ];
+                        }
+                    }
+                }
+
                 header("Location: index.php?acao=listar");
+                exit;
                 break;
 
-            case 'remover':
-                $this->ProdutoDAO->remover($_GET['codigo']);
-                header("Location: index.php?acao=listar");
+    
+            case 'mostrarCarrinho':
+                $carrinho = isset($_SESSION['carrinho']) ? $_SESSION['carrinho'] : [];
+                $viewFile = __DIR__ . "/../view/carrinho.php";
+                (function() use ($viewFile, $carrinho) {
+                    include __DIR__ . "/../view/template.php";
+                })();
                 break;
 
-            case 'formAlterar':
-                $produto = $this->ProdutoDAO->buscarPorcodigo($_GET['codigo']);
-                $viewFile = "view/Alterar.php";
-                include "view/template.php";
-                break;
-
-            case 'atualizar':
-                $produto = new Produto($_POST['codigo'], $_POST['descricao'], $_POST['preco'], $_POST['qtde']);
-                $this->ProdutoDAO->atualizar($produto);
-                header("Location: index.php?acao=listar");
+    
+            case 'removerCarrinho':
+                $codigo = $_GET['codigo'];
+                if (isset($_SESSION['carrinho'][$codigo])) {
+                    unset($_SESSION['carrinho'][$codigo]);
+                }
+                header("Location: index.php?acao=mostrarCarrinho");
+                exit;
                 break;
 
             default:
-                $produto = $this->ProdutoDAO->listar();
-                $viewFile = "view/Listar.php";
-                include "view/template.php";
+                $produtos = $this->ProdutoDAO->listar();
+                $viewFile = __DIR__ . "/../view/listar.php";
+                (function() use ($viewFile, $produtos) {
+                    include __DIR__ . "/../view/template.php";
+                })();
                 break;
         }
     }

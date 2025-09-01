@@ -38,26 +38,5 @@ class ProdutoDAO {
         return null;
     }
 
-    public function inserir(Produto $produto) {
-        $stmt = $this->conexao->prepare("INSERT INTO produto (descricao, preco, qtde) VALUES (:descricao, :preco, :qtde)");
-        $stmt->bindValue(':descricao', $produto->getdescricao());
-        $stmt->bindValue(':preco', $produto->getpreco());
-        $stmt->bindValue(':qtde', $produto->getqtde(), PDO::PARAM_INT);
-        return $stmt->execute();
-    }
-
-    public function atualizar(Produto $produto) {
-        $stmt = $this->conexao->prepare("UPDATE produto SET descricao = :descricao, preco = :preco, qtde = :qtde WHERE codigo = :codigo");
-        $stmt->bindValue(':descricao', $produto->getdescricao());
-        $stmt->bindValue(':preco', $produto->getpreco());
-        $stmt->bindValue(':qtde', $produto->getqtde(), PDO::PARAM_INT);
-        $stmt->bindValue(':codigo', $produto->getcodigo(), PDO::PARAM_INT);
-        return $stmt->execute();
-    }
-
-    public function remover($codigo) {
-        $stmt = $this->conexao->prepare("DELETE FROM produto WHERE codigo = :codigo");
-        $stmt->bindValue(':codigo', $codigo, PDO::PARAM_INT);
-        return $stmt->execute();
-    }
+    
 }

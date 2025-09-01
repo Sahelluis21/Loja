@@ -1,19 +1,35 @@
 <h2>Produtos</h2>
-<table border="1">
+
+<?php if (empty($produtos)) : ?>
+    <p>Nenhum produto disponível.</p>
+<?php else : ?>
+<table border="1" cellpadding="5" cellspacing="0">
     <tr>
-        <th>Codigo</th><th>Nome</th><th>Preço</th><th>Quantidade</th>
+        <th>Código</th>
+        <th>Nome</th>
+        <th>Preço</th>
+        <th>Estoque</th>
+        <th>Quantidade</th>
+        <th>Ação</th>
     </tr>
-    <?php foreach ($produto as $c): ?>
+    <?php foreach ($produtos as $p): ?>
     <tr>
-        <td><?= $c->getcodigo() ?></td>
-        <td><?= $c->getdescricao() ?></td>
-        <td><?= $c->getpreco() ?></td>
-        <td><?= $c->getqtde() ?></td>
+        <td><?= $p->getCodigo(); ?></td>
+        <td><?= htmlspecialchars($p->getDescricao()); ?></td>
+        <td>R$ <?= number_format($p->getPreco(), 2, ',', '.'); ?></td>
+        <td><?= $p->getQtde(); ?></td>
         <td>
-            <a href="index.php?acao=formAlterar&id=<?= $c->getId() ?>">Editar</a>
-            <a href="index.php?acao=remover&id=<?= $c->getId() ?>" 
-               onclick="return confirm('Tem certeza que deseja remover?')">Excluir</a>
+            <form action="index.php?acao=adicionarCarrinho" method="post" style="margin:0;">
+                <input type="hidden" name="codigo" value="<?= $p->getCodigo(); ?>">
+                <input type="number" name="quantidade" min="1" max="<?= $p->getQtde(); ?>" value="1" required>
+        </td>
+        <td>
+                <button type="submit">Adicionar ao Carrinho</button>
+            </form>
         </td>
     </tr>
     <?php endforeach; ?>
 </table>
+<?php endif; ?>
+
+<p><a href="index.php?acao=mostrarCarrinho">Ver Carrinho</a></p>

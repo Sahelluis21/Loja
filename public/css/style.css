@@ -1,14 +1,14 @@
-/* Variáveis de cores */
+/* Variáveis de cores (preto, cinza e verde) */
 :root {
-    --bg-body: #f4f6f8;
-    --bg-card: #ffffff;
-    --primary: #3b82f6;
-    --primary-hover: #2563eb;
-    --text: #1f2937;
-    --text-muted: #6b7280;
-    --border: #e5e7eb;
-    --success: #10b981;
-    --danger: #ef4444;
+    --bg-body: #1a1a1a;       /* fundo preto suave */
+    --bg-card: #2a2a2a;       /* cinza escuro */
+    --primary: #16a34a;       /* verde principal */
+    --primary-hover: #15803d; /* verde mais escuro */
+    --text: #f1f1f1;          /* texto claro */
+    --text-muted: #9ca3af;    /* cinza médio */
+    --border: #3a3a3a;        /* borda cinza escuro */
+    --success: #16a34a;
+    --danger: #dc2626;
 }
 
 /* Reset básico */
@@ -22,6 +22,7 @@
 body {
     background-color: var(--bg-body);
     color: var(--text);
+    text-align: center; /* Centraliza textos principais */
 }
 
 /* Header */
@@ -31,17 +32,19 @@ header {
     padding: 16px 24px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center; /* Centraliza o conteúdo */
     flex-wrap: wrap;
+    flex-direction: column;
 }
 
 header h1 {
     font-size: 1.8rem;
+    margin-bottom: 8px;
 }
 
 header nav a {
     color: #fff;
-    margin-left: 16px;
+    margin: 0 8px;
     text-decoration: none;
     font-weight: 500;
     transition: opacity 0.2s;
@@ -64,37 +67,39 @@ main {
     color: #fff;
     padding: 12px 16px;
     border-radius: 8px;
-    margin-bottom: 16px;
+    margin: 16px auto;
     font-weight: 500;
+    display: inline-block;
 }
 
-/* Tabela de clientes */
+/* Tabela */
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 16px;
+    margin: 16px auto;
     background-color: var(--bg-card);
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    text-align: center;
 }
 
 th, td {
     padding: 12px 16px;
-    text-align: left;
     border-bottom: 1px solid var(--border);
 }
 
 th {
-    background-color: #f3f4f6;
+    background-color: #333;
     font-weight: 600;
+    color: var(--text);
 }
 
 tr:last-child td {
     border-bottom: none;
 }
 
-/* Ações (editar/excluir) */
+/* Botões */
 a.btn {
     display: inline-block;
     padding: 6px 12px;
@@ -102,7 +107,7 @@ a.btn {
     text-decoration: none;
     color: #fff;
     font-size: 0.9rem;
-    margin-right: 6px;
+    margin: 4px;
     transition: background-color 0.2s;
 }
 
@@ -127,8 +132,10 @@ form {
     background-color: var(--bg-card);
     padding: 24px;
     border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
-    margin-top: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    margin: 16px auto;
+    max-width: 600px;
+    text-align: center;
 }
 
 form label {
@@ -144,6 +151,8 @@ form input {
     border: 1px solid var(--border);
     border-radius: 8px;
     font-size: 1rem;
+    background-color: #1f1f1f;
+    color: var(--text);
 }
 
 form button {
@@ -162,14 +171,14 @@ form button:hover {
 }
 
 form .btn-outline {
-    background-color: #fff;
+    background-color: transparent;
     color: var(--text);
     border: 1px solid var(--border);
     margin-left: 8px;
 }
 
 form .btn-outline:hover {
-    background-color: #f3f4f6;
+    background-color: #333;
 }
 
 /* Footer */
@@ -184,11 +193,7 @@ footer {
 @media (max-width: 640px) {
     header {
         flex-direction: column;
-        align-items: flex-start;
-    }
-
-    header nav {
-        margin-top: 8px;
+        align-items: center;
     }
 
     table, th, td {
