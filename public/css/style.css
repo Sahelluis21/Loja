@@ -1,206 +1,95 @@
-/* Variáveis de cores (preto, cinza e verde) */
 :root {
-    --bg-body: #1a1a1a;       /* fundo preto suave */
-    --bg-card: #2a2a2a;       /* cinza escuro */
-    --primary: #16a34a;       /* verde principal */
-    --primary-hover: #15803d; /* verde mais escuro */
-    --text: #f1f1f1;          /* texto claro */
-    --text-muted: #9ca3af;    /* cinza médio */
-    --border: #3a3a3a;        /* borda cinza escuro */
-    --success: #16a34a;
+    --bg-body: #1a1a1a;
+    --bg-card: #2a2a2a;
+    --primary: #16a34a;
+    --primary-hover: #15803d;
+    --text: #f1f1f1;
+    --text-muted: #9ca3af;
+    --border: #000;
     --danger: #dc2626;
 }
 
-/* Reset básico */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Inter', system-ui, sans-serif;
-}
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
 
-body {
-    background-color: var(--bg-body);
-    color: var(--text);
-    text-align: center; /* Centraliza textos principais */
-}
+body { background: var(--bg-body); color: var(--text); text-align: center; line-height: 1.5; }
 
-/* Header */
 header {
-    background-color: var(--primary);
+    background: var(--primary);
     color: #fff;
-    padding: 16px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Centraliza o conteúdo */
-    flex-wrap: wrap;
-    flex-direction: column;
+    padding: 20px;
+    display: flex; flex-direction: column; align-items: center;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 6px 16px rgba(0,0,0,.4);
 }
-
-header h1 {
-    font-size: 1.8rem;
-    margin-bottom: 8px;
-}
-
+header h1 { font-size: 2rem; margin-bottom: 10px; font-weight: 700; }
 header nav a {
-    color: #fff;
-    margin: 0 8px;
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.2s;
+    color: #fff; margin: 0 10px; text-decoration: none; font-weight: 500;
+    padding: 6px 10px; border-radius: 12px; transition: .2s;
 }
+header nav a:hover { background: rgba(255,255,255,.15); }
 
-header nav a:hover {
-    opacity: 0.8;
-}
+main { max-width: 960px; margin: 32px auto; padding: 0 16px; }
 
-/* Main container */
-main {
-    max-width: 960px;
-    margin: 24px auto;
-    padding: 0 16px;
-}
-
-/* Flash messages */
 .flash {
-    background-color: var(--success);
-    color: #fff;
-    padding: 12px 16px;
-    border-radius: 8px;
-    margin: 16px auto;
-    font-weight: 500;
+    background: var(--primary); color: #fff;
+    padding: 14px 18px; border-radius: 16px;
+    margin: 20px auto; font-weight: 600;
+    box-shadow: 0 6px 14px rgba(0,0,0,.3);
     display: inline-block;
 }
 
-/* Tabela */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 16px auto;
-    background-color: var(--bg-card);
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-    text-align: center;
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    margin: 20px auto; background: var(--bg-card);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0,0,0,.45);
 }
+th, td { padding: 14px 18px; border: 1px solid var(--border); }
+th { background: #333; font-weight: 700; text-transform: uppercase; }
 
-th, td {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-}
-
-th {
-    background-color: #333;
-    font-weight: 600;
-    color: var(--text);
-}
-
-tr:last-child td {
-    border-bottom: none;
-}
-
-/* Botões */
 a.btn {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 8px;
-    text-decoration: none;
-    color: #fff;
-    font-size: 0.9rem;
-    margin: 4px;
-    transition: background-color 0.2s;
+    display: inline-block; padding: 8px 14px; margin: 6px;
+    border-radius: 14px; font-size: .95rem; font-weight: 600;
+    color: #fff; text-decoration: none; transition: .2s;
+}
+a.btn:hover { transform: translateY(-2px); }
+a.btn-edit { background: var(--primary); }
+a.btn-edit:hover { background: var(--primary-hover); }
+a.btn-delete { background: var(--danger); }
+a.btn-delete:hover { opacity: .9; }
+
+a {
+    color: #fff;        /* cor branca */
+    text-decoration: none; /* opcional: remove o sublinhado */
 }
 
-a.btn-edit {
-    background-color: var(--primary);
+a:hover {
+    color: var(--primary); /* muda a cor ao passar o mouse, opcional */
 }
 
-a.btn-edit:hover {
-    background-color: var(--primary-hover);
-}
 
-a.btn-delete {
-    background-color: var(--danger);
-}
-
-a.btn-delete:hover {
-    opacity: 0.85;
-}
-
-/* Formulários */
 form {
-    background-color: var(--bg-card);
-    padding: 24px;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-    margin: 16px auto;
+    background: var(--bg-card); padding: 28px; margin: 20px auto;
+    border-radius: 20px; box-shadow: 0 8px 20px rgba(0,0,0,.45);
     max-width: 600px;
-    text-align: center;
 }
-
-form label {
-    display: block;
-    font-weight: 500;
-    margin-bottom: 6px;
-}
-
+form label { display: block; font-weight: 600; margin-bottom: 6px; text-align: left; }
 form input {
-    width: 100%;
-    padding: 10px 12px;
-    margin-bottom: 16px;
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    font-size: 1rem;
-    background-color: #1f1f1f;
-    color: var(--text);
+    width: 100%; padding: 12px 14px; margin-bottom: 18px;
+    border: 1px solid var(--border); border-radius: 14px;
+    background: #1f1f1f; color: var(--text);
 }
-
+form input:focus { border-color: var(--primary); outline: none; }
 form button {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 8px;
-    background-color: var(--primary);
-    color: #fff;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
+    padding: 12px 18px; border: none; border-radius: 14px;
+    background: var(--primary); color: #fff; font-weight: 700;
+    cursor: pointer; transition: .2s;
 }
-
-form button:hover {
-    background-color: var(--primary-hover);
-}
-
+form button:hover { background: var(--primary-hover); transform: scale(1.05); }
 form .btn-outline {
-    background-color: transparent;
-    color: var(--text);
-    border: 1px solid var(--border);
-    margin-left: 8px;
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border); margin-left: 10px;
 }
+form .btn-outline:hover { background: #333; }
 
-form .btn-outline:hover {
-    background-color: #333;
-}
-
-/* Footer */
-footer {
-    text-align: center;
-    margin: 32px 0;
-    color: var(--text-muted);
-    font-size: 0.9rem;
-}
-
-/* Responsividade */
-@media (max-width: 640px) {
-    header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    table, th, td {
-        font-size: 0.85rem;
-    }
-
-    form {
-        padding: 16px;
-    }
-}
+footer { text-align: center; margin: 40px 0; color: var(--text-muted); font-size: .9rem; }

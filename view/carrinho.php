@@ -3,6 +3,8 @@
 <?php if (empty($carrinho)) : ?>
     <p>Seu carrinho está vazio.</p>
 <?php else : ?>
+
+    
     <table border="1" cellpadding="5" cellspacing="0">
         <thead>
             <tr>

@@ -3,6 +3,8 @@
 <?php if (empty($produtos)) : ?>
     <p>Nenhum produto disponível.</p>
 <?php else : ?>
+
+    
 <table border="1" cellpadding="5" cellspacing="0">
     <tr>
         <th>Código</th>
