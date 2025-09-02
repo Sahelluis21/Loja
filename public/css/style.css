@@ -1,3 +1,4 @@
+ /* Este codigo foi gerado com ajuda de inteligencia artificial*/
 :root {
     --bg-body: #1a1a1a;
     --bg-card: #2a2a2a;
@@ -59,12 +60,12 @@ a.btn-delete { background: var(--danger); }
 a.btn-delete:hover { opacity: .9; }
 
 a {
-    color: #fff;        /* cor branca */
-    text-decoration: none; /* opcional: remove o sublinhado */
+    color: #fff;        
+    text-decoration: none; 
 }
 
 a:hover {
-    color: var(--primary); /* muda a cor ao passar o mouse, opcional */
+    color: var(--primary); 
 }
 
 

@@ -8,7 +8,7 @@
 </head>
 <body>
     <header>
-        <h1>Página Inicial</h1>
+        <h1>Mercearia Digital</h1>
         <nav>
             <a href="index.php?acao=listar">Produtos</a>
             <a href="index.php?acao=mostrarCarrinho">
